@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} My Projects {% endblock title%}
+
+{% block pagelandingcontent %}
+
+    <div class="flex flex-grow flex-col justify-center items-center text-center">
+        {% if projects %}
+            <h1 class="p-4 font-bold text-8xl transition-colors duration-500 ease-in-out text-emerald-800 hover:text-emerald-100 transform">Your Projects</h1>
+        {% else %}
+            <h1 class="p-4 font-bold text-8xl transition-colors duration-500 ease-in-out text-emerald-800 hover:text-emerald-100 transform">No Projects</h1>
+            <p class="p-4 font-bold text-slate-800 text-lg">You aren't signed in, if you would like to create/view your own projects please <a href="{% url 'signup'%}" class="text-emerald-100 underline">sign up</a> or <a href="{% url 'login' %}" class="text-emerald-100 underline">sign in</a>.</p>
+        {% endif %}
+    </div>
+
+{% endblock pagelandingcontent %}
+
+{% block content %}
+
+{% if projects %}
+    <div class="p-4 flex flex-wrap justify-center items-center text-center">
+
+        {% for project in projects %}
+            <!-- Project card -->
+            <div class="border border border-emerald-100 shadow-lg w-1/2 md:w-1/3 lg:w-1/4 m-4 rounded">
+                <div class="text-start px-6 py-4">
+                    <a href="{% url 'project' project.id %}" target="_blank" class="font-bold text-xl mb-2">{{ project.title }}<span class="text-xs"> &#8599;</span></a>
+                    <p class="text-gray-700 text-sm">{{ project.time_created }}</p>
+                    <br/>
+                    <p class="text-sm text-gray-700">{{ project.description }}</p>
+                </div>
+
+                <div class="flex justify-start px-3">
+                    <a href="{% url 'profile' project.user.id %}" class="inline-block bg-emerald-200 rounded-full px-3 py-1 text-sm font-semibold text-emerald-700 mr-2 mb-2">{{ project.user }}</a>
+                    {% if project.visibility == "PRIVATE" %}
+                        <span class="inline-block bg-indigo-900 rounded-full px-3 py-1 text-sm font-semibold text-slate-50 mr-2 mb-2">{{ project.visibility }}</span>
+                    {% endif %}
+                    {% if project.visibility == "PUBLIC" %}
+                        <span class="inline-block bg-sky-500 rounded-full px-3 py-1 text-sm font-semibold text-slate-700 mr-2 mb-2">{{ project.visibility }}</span>
+                    {% endif %}
+                    <span class="inline-block bg-yellow-500 rounded-full px-3 py-1 text-sm font-semibold text-slate-700 mr-2 mb-2">{{ project.stars }} ☆</span>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="flex grid-cols-2 p-4 justify-evenly">
+        <div class="h-full rounded overflow-hidden shadow-lg p-4">
+            <form method=POST>
+                {% csrf_token %}
+                {{projectcreationform.as_p}}
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Create Project</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+
+{% endblock content %}

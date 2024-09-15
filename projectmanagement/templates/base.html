@@ -1,0 +1,105 @@
+<!-- 
+FUTURE ADD IN TAILWIND CSS VIA CLI TOOL
+https://www.photondesigner.com/articles/tailwind-with-django?ref=rdjango-tailwind-with-django
+https://stackoverflow.com/questions/63392426/how-to-use-tailwindcss-with-django 
+-->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+
+    <title>{% block title %} {% endblock %} </title>
+</head>
+<body>
+
+    <div class="flex flex-col h-screen bg-gradient-to-r from-emerald-500 to-green-500">
+        <nav class="flex justify-evenly md:justify-center my-6 w-full p-2 font-mono items-center md:mx-0">
+            <!-- Logo -->
+             
+            <a href="{% url 'home' %}" class="rounded-xl">
+                <img src="{% static 'images/Logo.svg' %}" class="h-10" alt="ProjeX Logo">
+            </a>
+
+            <!-- Main navigation pages -->
+            <div id="mainMenu" class="hidden justify-center flex flex-col border items-center absolute top-20 z-20 w-5/6 md:flex md:border-none md:relative md:top-0 md:flex-row md:w-3/4 md:mx-2 mx-p-2 font-mono">
+                <a href="{% url 'home' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Home</a>
+                <a href="{% url 'myprojects' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Projects</a>
+                <a href="{% url 'explore' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Explore</a>
+            </div>
+
+            <!-- Show mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-emerald-800 rounded-lg transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform">
+                <svg fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+            </button>
+
+            
+            <!-- Profile menu button -->
+            <div class="flex justify-center items-center">
+                <button type="button" class="hover:ring-4 hover:ring-emerald-300 rounded-full h-8 w-8" id="profile-menu-button">
+                    <img class="w-8 h-8 rounded-full object-cover" src="{% static 'images/Logo.svg' %}" alt="pfp">
+                </button>
+
+                <!-- Profile dropdown menu -->
+                <div class="flex flex-col w-fit fixed hidden list-none z-20 text-emerald-500 top-20 list-none bg-slate-200 divide-y divide-gray-100 rounded-lg shadow" id="profile-menu">
+                    
+                    {% if user.is_authenticated %}
+                        <div class="px-4 py-3 items-center">                       
+                                <span class="block text-sm text-emerald-900 flex justify-center">{{ user.firstname }}</span>
+                                <span class="block text-sm text-emerald-500 truncate flex justify-center">@{{user.username}}</span>
+                        </div>
+                        <ul class="py-2 text-center">
+                            {% if user.username == "admin" %}
+                                <li>
+                                    <a href="{% url 'profilelist' %}" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">Profiles List</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{% url 'profile' user.id %}" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">Settings</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">Sign out</a>
+                            </li>
+                        </ul>
+
+                    {% elif not user.is_authenticated %}
+                        <div class="px-4 py-3 flex flex-row items-start justify-center text-center">                       
+                            <span class="w-fit block text-sm text-emerald-900">Not Signed In</span>
+                        </div>
+                        <ul class="py-2 text-center">
+                            <li>
+                                <a href="{% url 'login' %}" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">Sign In</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'signup' %}" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">Sign Up</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+        </nav>  
+
+        
+        {% block pagelandingcontent %}
+
+        {% endblock %}   
+    </div>
+    
+    <div class="border border-emerald-200"></div>
+
+    {% block content %} 
+        
+    {% endblock %}
+
+    <!-- <section class="flex flex-col h-screen bg-emerald-100"></section> -->
+
+</body>
+</html>

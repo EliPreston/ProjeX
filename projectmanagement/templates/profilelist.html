@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} Profile List {% endblock title%}
+
+
+{% block pagelandingcontent %}
+    <div class="flex flex-grow justify-center items-center text-center">
+        <h1 class="p-4 font-bold text-8xl transition-colors duration-500 ease-in-out text-emerald-800 hover:text-emerald-100 transform">All Users</h1>
+    </div>
+{% endblock pagelandingcontent %}
+
+
+{% block content %}
+
+    <div class="max-w-screen-xl grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center mx-auto p-4 justify-center">
+
+        {% if profiles %}
+            {% for profile in profiles %}
+                <div class="max-w-sm rounded overflow-hidden shadow-lg mx-2 my-2">
+                    <!-- <img class="w-full" src="/img/card-top.jpg" alt="Profile Image"> -->
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">{{ profile.user.username }}</div>
+                        <p class="text-gray-700 text-base"></p>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                        <a href="{% url 'profile' profile.user.id %}" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">@{{ profile.user.username|lower }}</a>
+                        <!-- <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span> -->
+                        <!-- <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span> -->
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+        {% endif %}
+    </div>
+
+{% endblock content %}

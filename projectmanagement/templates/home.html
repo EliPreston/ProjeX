@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock title%}
+
+{% block pagelandingcontent %}
+    <div class="flex flex-grow justify-center items-center text-center">
+        <h1 class="p-4 font-bold text-8xl transition-colors duration-500 ease-in-out text-emerald-800 hover:text-emerald-100 transform">ProjeX Home</h1>
+    </div>
+{% endblock pagelandingcontent %}
+
+    
+{% block content %}
+
+    <h1 class="flex justify-center text-center font-bold text-3xl m-4 mt-6">Top Projects</h1>
+
+    <div class="p-4 flex flex-wrap justify-center items-center text-center">
+
+        {% for project in projects %}
+            <!-- Project card -->
+            <div class="border border border-emerald-100 shadow-lg w-1/2 md:w-1/3 lg:w-1/4 m-4 rounded">
+                <div class="text-start px-6 py-4">
+                    <a href="{% url 'project' project.id %}" target="_blank" class="font-bold text-xl mb-2">{{ project.title }}<span class="text-xs"> &#8599;</span></a>
+                    <p class="text-gray-700 text-sm">{{ project.time_created }}</p>
+                    <br/>
+                    <p class="text-sm text-gray-700">{{ project.description }}</p>
+                </div>
+
+                <div class="flex justify-start px-3">
+                    <a href="{% url 'profile' project.user.id %}" class="inline-block bg-emerald-200 rounded-full px-3 py-1 text-sm font-semibold text-emerald-700 mr-2 mb-2">{{ project.user }}</a>
+                    <span class="inline-block bg-yellow-500 rounded-full px-3 py-1 text-sm font-semibold text-slate-700 mr-2 mb-2">{{ project.stars }} ☆</span>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock content %}
