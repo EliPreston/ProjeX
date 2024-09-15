@@ -20,7 +20,7 @@ There is still a lot that I want to do in terms of cleaning up design elements, 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/EliPreston/ProjeX.git
 ```
 
 Go to the project directory
@@ -28,7 +28,6 @@ Go to the project directory
 ```bash
   cd my-project
 ```
-
 
 Create & Activate virtual environment \
 **If you don't have python3 installed, install that first**
@@ -39,12 +38,11 @@ Create & Activate virtual environment \
 
 Install dependencies
 ```bash
-  pip install Django=5.1.1
+  pip install Django==5.1.1
 ```
 
 Make migrations (to setup DB)
 ```bash
-  python manage.py makemigrations
   python manage.py migrate
 ```
 
@@ -57,6 +55,9 @@ Start local server (localhost:8000)
 ```bash
   python manage.py runserver
 ```
+
+Open localhost:8000
+
 ## Features
 
 **Implemented**:
