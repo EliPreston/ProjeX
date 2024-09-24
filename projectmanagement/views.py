@@ -116,7 +116,12 @@ def project(request, projkey):
     if request.user.is_authenticated:
         proj = Project.objects.filter(id=projkey)
         materials = ProjectMaterial.objects.filter(project=proj[0])
-        return render(request, 'project.html', {"project": proj[0], "materials": materials})
+        total_cost = 0
+        for material in materials:
+            total_cost += material.total_price()
+
+        
+        return render(request, 'project.html', {"project": proj[0], "materials": materials, "total_material_cost": total_cost})
     else:
         return redirect('home')
 

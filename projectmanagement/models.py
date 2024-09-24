@@ -20,6 +20,7 @@ class Project(models.Model):
 
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
+    instructions = models.CharField(max_length=4000)
     visibility = models.CharField( 
         max_length = 10, 
         choices = PROJECT_VISIBILITY, 
@@ -40,6 +41,9 @@ class ProjectMaterial(models.Model):
 
     def __str__(self):
         return(f"{self.approx_number_of_units} {self.material_name}'s @ ${self.approx_price_per_unit} (each)")
+    
+    def total_price(self):
+        return self.approx_price_per_unit * self.approx_number_of_units
 
 
 # Create your models here.

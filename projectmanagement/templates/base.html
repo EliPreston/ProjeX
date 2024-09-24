@@ -27,10 +27,10 @@ https://stackoverflow.com/questions/63392426/how-to-use-tailwindcss-with-django
             </a>
 
             <!-- Main navigation pages -->
-            <div id="mainMenu" class="hidden justify-center flex flex-col border items-center absolute top-20 z-20 w-5/6 md:flex md:border-none md:relative md:top-0 md:flex-row md:w-3/4 md:mx-2 mx-p-2 font-mono">
-                <a href="{% url 'home' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Home</a>
-                <a href="{% url 'myprojects' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Projects</a>
-                <a href="{% url 'explore' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-3/4 md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Explore</a>
+            <div id="mainMenu" class="hidden justify-center flex flex-col items-center absolute top-20 z-20 w-5/6 rounded-xl bg-white md:bg-transparent md:flex md:border-none md:relative md:top-0 md:flex-row md:w-3/4 md:mx-2 mx-p-2 font-mono">
+                <a href="{% url 'home' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-full md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Home</a>
+                <a href="{% url 'myprojects' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-full md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Projects</a>
+                <a href="{% url 'explore' %}" class="text-center text-sm font-bold text-emerald-800 z-20 py-2 px-3 w-full md:mx-4 md:w-2/12 transition-colors duration-500 ease-in-out bg-white hover:bg-emerald-100 transform rounded-lg">Explore</a>
             </div>
 
             <!-- Show mobile menu button -->
